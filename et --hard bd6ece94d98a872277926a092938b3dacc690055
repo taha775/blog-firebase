@@ -1,0 +1,43 @@
+[33mcommit bd6ece94d98a872277926a092938b3dacc690055[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: taha775 <tahayousuf26@gmail.com>
+Date:   Mon Jul 1 05:07:27 2024 -0700
+
+    updates
+
+[33mcommit 5f42d0144f900b6edb26a75208876301db8fd371[m
+Author: taha775 <tahayousuf26@gmail.com>
+Date:   Mon Jul 1 04:45:07 2024 -0700
+
+    Revert "updated navbar and banner ui"
+    
+    This reverts commit 5ed520c0e3a4f3b021231aa1269b7d1b9eea53c9.
+
+[33mcommit 5ed520c0e3a4f3b021231aa1269b7d1b9eea53c9[m[33m ([m[1;31morigin/new-branch-name[m[33m, [m[1;32mnew-branch-name[m[33m)[m
+Author: taha775 <tahayousuf26@gmail.com>
+Date:   Mon Jul 1 04:35:02 2024 -0700
+
+    updated navbar and banner ui
+
+[33mcommit 2cd169b877eda5ef12b41a99b5177bb193c29d50[m
+Author: taha775 <tahayousuf26@gmail.com>
+Date:   Wed Jun 26 03:30:27 2024 -0700
+
+    added firebase and panels
+
+[33mcommit 2e4a88389d6aadc51b20dcbccbeae49302834037[m
+Author: taha775 <tahayousuf26@gmail.com>
+Date:   Mon Jun 10 22:22:59 2024 -0700
+
+    darkmode
+
+[33mcommit 3e51bffd3df3a4d3787b7b2b74b04c539f30d5b6[m
+Author: taha775 <tahayousuf26@gmail.com>
+Date:   Wed Jun 5 07:44:38 2024 -0700
+
+    remove the navigation file
+
+[33mcommit bd89ec78dafb4664519fe03dab47a4266acb0f86[m
+Author: taha775 <tahayousuf26@gmail.com>
+Date:   Wed Jun 5 07:17:01 2024 -0700
+
+    added files

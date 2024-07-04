@@ -1,0 +1,28 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+  body{
+    height: 100vh;
+    margin: 0;
+    color: black;
+    font-family:"Montserrat";}
+
+    *{
+      margin: 10;
+      padding: 10;
+    }
+
+/* 
+
+
+    
+    .montserrat-<uniquifier> {
+      font-family: "Montserrat", sans-serif;
+      font-optical-sizing: auto;
+      font-weight: <weight>;
+      font-style: normal;
+    }
+     */
