@@ -158,7 +158,7 @@ const Navbar = ({showNavbar}) => {
         
       </div>
 
-      <div className={`categories  ${theme ==="dark"? "text-myorange bg-gray-800" : "bg-white text-black" } flex-wrap justify-center list-none items-center gap-x-10 gap-y-2 font-myfont hidden lg:flex  `}>
+      <div className={`categories  ${theme ==="dark"? "text-myorange bg-gray-800" : "bg-white text-black" } flex-wrap justify-center list-none items-center gap-x-10 gap-y-2 font-myfont hidden lg:flex  w-full h-[3.8rem]  item-left `}>
         <li >
           <NavLink
             to="/business"

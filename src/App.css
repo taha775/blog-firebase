@@ -39,53 +39,12 @@
   box-shadow: 0px 0px 10px 0px;
 
 }
-.categories{
-  width: full;
-  height: 60px;
-  top: 120px;
-  gap: 0px;
-  opacity: 0px;
-  font-family: Montserrat;
-font-size: 16px;
-font-weight: 500;
-line-height: 19.5px;
-text-align: left;
-background-color: #EEEEEE;
-
-
-
-  
-}
 
 
 
 
 
 
-label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-}
-
-button {
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #0056b3;
-}
 
 
 /* swiper slider css */
