@@ -85,9 +85,9 @@ const ProfileHeader = () => {
   };
 
   return (
-    <div className={`navbar pt-0 flex items-center justify-between mx-auto ${theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'} p-6`}>
+    <div className={`navbar  flex items-center justify-between mx-auto ${theme === 'dark' ? 'bg-black text-white' : 'bg-white text-black'} p-6`}>
       <div className="left flex items-center">
-        <img className='w-28' src={theme === 'dark' ? logoDark : logoLight} alt="Logo" />
+        <img className='w-28' src={logoLight} alt="Logo" />
         <div className="center gap-3 flex items-center">
           <Dropdown>
             <Dropdown.Toggle variant="link" id="dropdown-basic" className="text-decoration-none text-reset">

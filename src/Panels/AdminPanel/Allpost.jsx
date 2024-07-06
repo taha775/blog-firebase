@@ -146,10 +146,10 @@ const Allpost = () => {
                           alt={post.username}
                           className="w-10 h-10 object-cover rounded-full mr-2"
                         />
-                        <p>{post.username}</p>
+                        <p>{post.postedby}</p>
                       </div>
                     ) : (
-                      <p>{post.username}</p>
+                      <p>{post.postedby}</p>
                     )}
                   </td>
                 </tr>

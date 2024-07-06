@@ -10,7 +10,7 @@ import Signup from "../Components/USER/Signup";
 import Login from "../Components/USER/Login";
 import Userpanel from "../Panels/UserPanel/Userpanel";
 import Adminpanel from "../Panels/AdminPanel/Adminpanel";
-import Writerpanel from "../Panels/WriterPanel/Writerpanel";
+
 import Post from "../Panels/UserPanel/Post";
 import Mypost from "../Panels/UserPanel/Mypost";
 import Buisness from "../Components/Categories/Buisness";
@@ -28,6 +28,10 @@ import Allusers from "../Panels/AdminPanel/Allusers";
 import Allpost from "../Panels/AdminPanel/Allpost";
 import Allposts from "../Panels/UserPanel/Allposts";
 import AddPost from "../Panels/AdminPanel/AddPost";
+import Adminprofile from "../Panels/AdminPanel/Adminprofile";
+import MyAdminPost from "../Panels/AdminPanel/MyAdminPost";
+import EditPost from "../Panels/AdminPanel/EditPost";
+import Allauthors from "../Panels/AdminPanel/Allauthors";
 
 
 
@@ -63,16 +67,22 @@ const Navigation = () => {
           <Route path="/user-panel/:uid" element={<Allposts />} />
           <Route path="new-post/:uid" element={<Post />} />
           <Route path="my-posts/:uid" element={<Mypost />} />
+          <Route path="editpost/:postId" element={<EditPost />} />
         
         </Route>
       
-        <Route path="/writer-panel/:uid" element={<Writerpanel  showNavBar={false} showFooter={false} />} />
+       
         
-        <Route path="/admin-panel/*" element={<Adminpanel />}>
+        <Route path="/admin-panel/:uid/*" element={<Adminpanel />}>
         
-          <Route path="allusers" element={<Allusers />} />
-          <Route path="allposts" element={<Allpost />} />
-          <Route path="addpost" element={<AddPost />} />
+          <Route path="adminprofile/:uid" element={<Adminprofile />} />
+          <Route path="allusers/:uid" element={<Allusers />} />
+          <Route path="allauthors/:uid" element={<Allauthors/>} />
+          <Route path="allposts/:uid" element={<Allpost />} />
+          <Route path="addpost/:uid" element={<AddPost />} />
+          <Route path="myposts/:uid" element={<MyAdminPost />} />
+          <Route path="editpost/:postId" element={<EditPost />} />
+
         </Route>
         
         </Routes>

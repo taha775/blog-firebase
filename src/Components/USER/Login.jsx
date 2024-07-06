@@ -9,34 +9,49 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../../Config/Firebase";
 import { toast } from 'react-toastify';
-import { ADMINEMAIL, ADMINPASSWORD } from "../../Config/Constant"; // Importing the constants
+// Importing the constants
 
 const Login = () => {
-  
   const { theme } = useSelector(state => state.theme); 
   const navigate = useNavigate();
 
-  const formik = useFormik({
+  const formik = useFormik({  
     initialValues: {
       email: '',
       password: '',
     },
     onSubmit: async (values, { setSubmitting }) => {
-      // Admin login
-      if (values.email === ADMINEMAIL && values.password === ADMINPASSWORD) {
-        navigate('/admin-panel'); // Navigate to admin panel
-        toast.success('Admin login successful');
-        setSubmitting(false);
-        return;
-      }
-
       try {
         const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
         const user = userCredential.user;
 
-        // Get user data from Firestore
-       const userDoc = await getDoc(doc(db, "users", user.uid));
+        // Log the admin UID to verify it's correct
+        console.log('Admin UID:', user.uid);
+
+        // Get admin data from Firestore
+        const adminDoc = await getDoc(doc(db, "admin", user.uid));
         
+        if (adminDoc.exists()) {
+          const adminData = adminDoc.data();
+
+          // Log the admin data to check its structure
+          console.log('Admin data:', adminData);
+
+          // Check the role and navigate accordingly
+          if (adminData.role === 'admin') {
+            navigate(`/admin-panel/${adminData.uid}`); // Navigate to admin panel with admin UID
+            toast.success('Admin login successful');
+          } else {
+            toast.error('User is not an admin');
+          }
+        } else {
+          // Log an error if admin document does not exist
+          console.error('Admin document not found');
+          toast.error('Admin document not found');
+        }
+
+        // Get user data from Firestore
+        const userDoc = await getDoc(doc(db, "users", user.uid));
 
         // Check if user document exists
         if (userDoc.exists()) {
@@ -46,13 +61,21 @@ const Login = () => {
           // Check the role and navigate accordingly
           if (userData.role === 'user') {
             navigate(`/user-panel/${userData.uid}`); // Navigate to user panel with user UID
-          } else if (userData.role === 'writer') {
-            navigate(`/writer-panel/${userData.uid}`); // Navigate to writer panel with user UID
-          } else {
+          } else if (userData.role === 'aurthor' && userData.status ==='pending') {
+            toast.info("please wait for the admin to approved your profile")
+              
+            // navigate(`/writer-panel/${userData.uid}`); // Navigate to writer panel with user UID
+          }
+          else if(userData.role === 'aurthor' && userData.status ==='approved'){
+            toast.success("login successful")
+            navigate(`/admin-panel/${userData.uid}`); // Naviga
+          }
+          
+          else {
             toast.error('Unknown user role');
           }
 
-          toast.success('Login successful');
+         
         } else {
           toast.error('User data not found');
         }
@@ -98,14 +121,13 @@ const Login = () => {
           <div className="mt-4">
             <label htmlFor="email" className={`block text-sm font-medium ${theme === 'dark' ? 'text-blue-700' : 'text-black'}`}>Email Address</label>
             <input
-            id="email"
+              id="email"
               type="email"
               name="email"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.email}
               className={`mt-1 w-full px-3 py-2 rounded-lg border focus:outline-none focus:border-blue-500 ${theme === 'dark' ? 'bg-gray-800 text-white border-black' : 'bg-white text-black border-gray-300'}`}
-       
               placeholder="Enter your email"
               autoComplete="email"
             />
@@ -113,14 +135,13 @@ const Login = () => {
           <div className="mt-4">
             <label htmlFor="password" className={`block text-sm font-medium ${theme === 'dark' ? 'text-blue-700' : 'text-black'}`}>Password</label>
             <input
-            id="password"
+              id="password"
               type="password"
               name="password"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.password}
               className={`mt-1 w-full px-3 py-2 rounded-lg border focus:outline-none focus:border-blue-500 ${theme === 'dark' ? 'bg-gray-800 text-white border-black' : 'bg-white text-black border-gray-300'}`}
-              
               placeholder="Enter your password"
               autoComplete="current-password"
             />

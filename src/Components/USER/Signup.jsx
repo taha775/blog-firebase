@@ -3,7 +3,6 @@ import React from 'react';
 import { Box, Button, Heading } from '@radix-ui/themes';
 import { FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-// import { useTheme } from '../../../ThemeContext';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { auth, db } from '../../Config/Firebase';
@@ -13,23 +12,20 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from 'react-redux';
 
-
 const Signup = () => {
   const { theme } = useSelector(state => state.theme); 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const initialValues = {
     name: '',
     email: '',
     password: '',
     role: 'user',
-    completeProfile:null,
-    profileImage:null,
-    country:null,
-    Mobile:null,
-    DateOfBirth:null
-
-    
+    completeProfile: null,
+    profileImage: null,
+    country: null,
+    Mobile: null,
+    DateOfBirth: null
   };
 
   const validationSchema = Yup.object({
@@ -41,40 +37,40 @@ const Signup = () => {
 
   const onSubmit = async (values, { setSubmitting }) => {
     try {
-      if(values.role =="writer")
-        console
       const userCredential = await createUserWithEmailAndPassword(auth, values.email, values.password);
       const user = userCredential.user;
 
-     // using to store in differenet collection acc to roles
-
-
-      // Save additional user data in Firestore
-      await setDoc(doc(db, "users", user.uid), {
+      
+      const additionalData = {
         uid: user.uid,
         name: values.name,
         email: values.email,
         role: values.role,
-        profileImage:null,
-        country:null,
-        Mobile:null,
-        completeProfile:null,
-        DateOfBirth:null
-      });
-      toast.success("User sign up succecssful")
-      navigate('/login')
+        profileImage: null,
+        country: null,
+        Mobile: null,
+        completeProfile: null,
+        DateOfBirth: null
+      };
+
+      if (values.role === 'aurthor') {
+        additionalData.status = 'pending';
+        toast.info("your profile takes 24 hours to approved you will got the email after approving ")
+        
+      }
+
+      // Save additional user data in Firestore
+      await setDoc(doc(db, "users", user.uid), additionalData);
+
+      toast.success("User sign up successful");
+      navigate('/login');
       console.log('User signed up and data saved in Firestore:', user);
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
-        
-        
-          toast.error('Email already in use')
-        
+        toast.error('Email already in use');
       } else {
         toast.error(error.message);
       }
-    
-
     } finally {
       setSubmitting(false);
     }
@@ -167,8 +163,8 @@ const Signup = () => {
                     User
                   </label>
                   <label>
-                    <Field type="radio" name="role" value="writer" className="mr-2" />
-                    Writer
+                    <Field type="radio" name="role" value="aurthor" className="mr-2" />
+                    Author
                   </label>
                 </div>
                 <ErrorMessage name="role" component="div" className="text-red-500 text-sm" />

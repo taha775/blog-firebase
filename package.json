@@ -28,7 +28,7 @@
     "clsx": "^2.1.1",
     "firebase": "^10.12.2",
     "formik": "^2.4.6",
-    "framer-motion": "^11.2.10",
+    "framer-motion": "^11.2.13",
     "google-map-react": "^2.2.1",
     "jodit-react": "^4.1.2",
     "prop-types": "^15.8.1",

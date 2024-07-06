@@ -17,12 +17,12 @@ const Post = () => {
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
 
-  const categories = ['Technology', 'Health', 'Education', 'Entertainment', 'News', 'Sports', 'Business', 'AI'];
+  const categories = ['Technology', 'Health', 'Education', 'Entertainment', 'News', 'Sports', 'Business','Travel','Lifesyle'];
 
   const { uid } = useParams();
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchUserData = async () => { 
       try {
         const userdata = query(collection(db, 'users'), where('uid', '==', uid)); // Query to fetch user document by uid
         console.log(userdata)
@@ -93,6 +93,7 @@ const Post = () => {
         status, // Include status in postData
         imageUrl: uploadedImageUrl, // Use the URL from the upload
         date: new Date().toISOString(),
+        postedby:user?.name
       };
 
       await addDoc(collection(db, 'posts'), postData);
