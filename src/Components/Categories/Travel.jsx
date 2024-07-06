@@ -52,6 +52,7 @@ const Travel = () => {
               <img src={post.imageUrl} alt={post.title} className="w-48 h-48 object-cover mb-4" />
               <p>Category: {post.category}</p>
               <p>Date: {new Date(post.date).toLocaleString()}</p>
+              <p>posted by : {post.postedby}</p>
             </li>
           ))}
         </ul>

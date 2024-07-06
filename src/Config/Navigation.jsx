@@ -31,7 +31,8 @@ import AddPost from "../Panels/AdminPanel/AddPost";
 import Adminprofile from "../Panels/AdminPanel/Adminprofile";
 import MyAdminPost from "../Panels/AdminPanel/MyAdminPost";
 import EditPost from "../Panels/AdminPanel/EditPost";
-import Allauthors from "../Panels/AdminPanel/Allauthors";
+
+import AllModerators from "../Panels/AdminPanel/AllModerators";
 
 
 
@@ -77,7 +78,7 @@ const Navigation = () => {
         
           <Route path="adminprofile/:uid" element={<Adminprofile />} />
           <Route path="allusers/:uid" element={<Allusers />} />
-          <Route path="allauthors/:uid" element={<Allauthors/>} />
+          <Route path="allmoderators/:uid" element={<AllModerators/>} />
           <Route path="allposts/:uid" element={<Allpost />} />
           <Route path="addpost/:uid" element={<AddPost />} />
           <Route path="myposts/:uid" element={<MyAdminPost />} />

@@ -53,7 +53,7 @@ const Signup = () => {
         DateOfBirth: null
       };
 
-      if (values.role === 'aurthor') {
+      if (values.role === 'moderator') {
         additionalData.status = 'pending';
         toast.info("your profile takes 24 hours to approved you will got the email after approving ")
         
@@ -163,8 +163,8 @@ const Signup = () => {
                     User
                   </label>
                   <label>
-                    <Field type="radio" name="role" value="aurthor" className="mr-2" />
-                    Author
+                    <Field type="radio" name="role" value="moderator" className="mr-2" />
+                    Moderator
                   </label>
                 </div>
                 <ErrorMessage name="role" component="div" className="text-red-500 text-sm" />

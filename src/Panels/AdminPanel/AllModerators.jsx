@@ -1,24 +1,24 @@
-// src/components/Allauthors.js
+// src/components/AllModerators.js
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAuthors, approveAuthor, declineAuthor, deleteAuthor } from '../../store/slices/authorSlice';
+import { fetchModerators, approveModerator, declineModerator, deleteModerator } from '../../store/slices/authorSlice';
 import { updateDoc, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../Config/Firebase';
 
-const Allauthors = () => {
+const AllModerators = () => {
   const dispatch = useDispatch();
-  const { authors, status, error } = useSelector(state => state.authors);
+  const { moderators, status, error } = useSelector(state => state.moderators);
 
   useEffect(() => {
     if (status === 'idle') {
-      dispatch(fetchAuthors());
+      dispatch(fetchModerators());
     }
   }, [status, dispatch]);
 
   const handleApprove = async (userId) => {
     try {
       await updateDoc(doc(db, 'users', userId), { status: 'approved' });
-      dispatch(approveAuthor(userId));
+      dispatch(approveModerator(userId));
     } catch (error) {
       console.error('Error updating user status:', error);
     }
@@ -27,17 +27,17 @@ const Allauthors = () => {
   const handleDecline = async (userId) => {
     try {
       await updateDoc(doc(db, 'users', userId), { status: 'declined' });
-      dispatch(declineAuthor(userId));
+      dispatch(declineModerator(userId));
     } catch (error) {
       console.error('Error updating user status:', error);
     }
   };
 
   const handleDelete = async (userId) => {
-    if (window.confirm('Are you sure you want to delete this author?')) {
+    if (window.confirm('Are you sure you want to delete this moderator?')) {
       try {
         await deleteDoc(doc(db, 'users', userId));
-        dispatch(deleteAuthor(userId));
+        dispatch(deleteModerator(userId));
       } catch (error) {
         console.error('Error deleting user:', error);
       }
@@ -46,12 +46,12 @@ const Allauthors = () => {
 
   return (
     <div className="relative h-auto w-auto">
-      <h1 className="text-2xl font-bold mb-4">All Authors</h1>
+      <h1 className="text-2xl font-bold mb-4">All Moderators</h1>
       {status === 'loading' && <p>Loading...</p>}
       {status === 'failed' && <p>{error}</p>}
       {status === 'succeeded' && (
         <>
-          <p className="mb-4">Total Authors: {authors.length}</p>
+          <p className="mb-4">Total Moderators: {moderators.length}</p>
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
@@ -86,7 +86,7 @@ const Allauthors = () => {
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
-                {authors.map(user => (
+                {moderators.map(user => (
                   <tr key={user.id}>
                     <td className="px-6 py-4 whitespace-nowrap">{user.name}</td>
                     <td className="px-6 py-4 whitespace-nowrap">{user.email}</td>
@@ -97,26 +97,23 @@ const Allauthors = () => {
                     <td className="px-6 py-4 whitespace-nowrap">{user.role}</td>
                     <td className="px-6 py-4 whitespace-nowrap">{user.status}</td>
                     <td className="px-6 py-4 whitespace-nowrap">
-                    
-                        <>
-                          <button
-                            onClick={() => handleApprove(user.id)}
-                            className={`bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mr-2 ${user.status !== 'pending' ? 'hidden' : ''}`}
-                          >
-                            Approve
-                          </button>
-                          <button
-                            onClick={() => handleDecline(user.id)}
-                            className={`bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded mr-2 ${user.status !== 'pending' ? 'hidden' : ''}`}
-                          >
-                            Decline
-                          </button>
-                        </>
-                      
+                      <>
+                        <button
+                          onClick={() => handleApprove(user.id)}
+                          className={`bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded mr-2 ${user.status !== 'pending' ? 'hidden' : ''}`}
+                        >
+                          Approve
+                        </button>
+                        <button
+                          onClick={() => handleDecline(user.id)}
+                          className={`bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded mr-2 ${user.status !== 'pending' ? 'hidden' : ''}`}
+                        >
+                          Decline
+                        </button>
+                      </>
                       <button
                         onClick={() => handleDelete(user.id)}
-                        className={`bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded ${user.role ==="aurthor"?'disabled':'enabled:'}`}
-                       
+                        className={`bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded ${user.role === "moderator" ? 'disabled' : 'enabled'}`}
                       >
                         Delete
                       </button>
@@ -132,4 +129,4 @@ const Allauthors = () => {
   );
 };
 
-export default Allauthors;
+export default AllModerators;

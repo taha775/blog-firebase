@@ -61,12 +61,12 @@ const Login = () => {
           // Check the role and navigate accordingly
           if (userData.role === 'user') {
             navigate(`/user-panel/${userData.uid}`); // Navigate to user panel with user UID
-          } else if (userData.role === 'aurthor' && userData.status ==='pending') {
+          } else if (userData.role === 'moderator' && userData.status ==='pending') {
             toast.info("please wait for the admin to approved your profile")
               
             // navigate(`/writer-panel/${userData.uid}`); // Navigate to writer panel with user UID
           }
-          else if(userData.role === 'aurthor' && userData.status ==='approved'){
+          else if(userData.role === 'moderator' && userData.status ==='approved'){
             toast.success("login successful")
             navigate(`/admin-panel/${userData.uid}`); // Naviga
           }

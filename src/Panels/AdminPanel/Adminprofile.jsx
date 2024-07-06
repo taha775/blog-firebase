@@ -58,7 +58,7 @@ const AdminProfile = () => {
 
         // Calculate total number of authors
         const usersList = usersSnapshot.docs.map(doc => doc.data());
-        const authors = usersList.filter(user => user.role === 'author'); // Adjust 'role' field based on your user data structure
+        const authors = usersList.filter(user => user.role === 'moderator'); // Adjust 'role' field based on your user data structure
         setTotalAuthors(authors.length);
       } catch (err) {
         console.error('Error fetching counts:', err);
@@ -102,7 +102,7 @@ const AdminProfile = () => {
               <p className="text-3xl font-bold">{totalPosts}</p>
             </div>
             <div className="bg-white shadow-md rounded-lg p-4 w-48 text-center">
-              <h2 className="text-lg font-semibold">Total Authors</h2>
+              <h2 className="text-lg font-semibold">Total Moderators</h2>
               <p className="text-3xl font-bold">{totalAuthors}</p>
             </div>
           </div>

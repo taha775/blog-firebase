@@ -1,58 +1,58 @@
-// src/features/authors/authorSlice.js
+// src/features/moderators/moderatorSlice.js
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { collection, getDocs, updateDoc, deleteDoc, doc } from 'firebase/firestore';
 import { db } from '../../Config/Firebase';
 
-export const fetchAuthors = createAsyncThunk('authors/fetchAuthors', async () => {
+export const fetchModerators = createAsyncThunk('moderators/fetchModerators', async () => {
   const usersCollection = collection(db, 'users');
   const usersSnapshot = await getDocs(usersCollection);
   const usersList = usersSnapshot.docs.map(doc => ({
     id: doc.id,
     ...doc.data()
   }));
-  return usersList.filter(user => user.role === 'aurthor');
+  return usersList.filter(user => user.role === 'moderator');
 });
 
-export const authorSlice = createSlice({
-  name: 'authors',
+export const moderatorSlice = createSlice({
+  name: 'moderators',
   initialState: {
-    authors: [],
+    moderators: [],
     status: 'idle',
     error: null
   },
   reducers: {
-    approveAuthor: (state, action) => {
-      const author = state.authors.find(author => author.id === action.payload);
-      if (author) {
-        author.status = 'approved';
+    approveModerator: (state, action) => {
+      const moderator = state.moderators.find(moderator => moderator.id === action.payload);
+      if (moderator) {
+        moderator.status = 'approved';
       }
     },
-    declineAuthor: (state, action) => {
-      const author = state.authors.find(author => author.id === action.payload);
-      if (author) {
-        author.status = 'declined';
+    declineModerator: (state, action) => {
+      const moderator = state.moderators.find(moderator => moderator.id === action.payload);
+      if (moderator) {
+        moderator.status = 'declined';
       }
     },
-    deleteAuthor: (state, action) => {
-      state.authors = state.authors.filter(author => author.id !== action.payload);
+    deleteModerator: (state, action) => {
+      state.moderators = state.moderators.filter(moderator => moderator.id !== action.payload);
     }
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchAuthors.pending, (state) => {
+      .addCase(fetchModerators.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchAuthors.fulfilled, (state, action) => {
+      .addCase(fetchModerators.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.authors = action.payload;
+        state.moderators = action.payload;
       })
-      .addCase(fetchAuthors.rejected, (state, action) => {
+      .addCase(fetchModerators.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });
   }
 });
 
-export const { approveAuthor, declineAuthor, deleteAuthor } = authorSlice.actions;
+export const { approveModerator, declineModerator, deleteModerator } = moderatorSlice.actions;
 
-export default authorSlice.reducer;
+export default moderatorSlice.reducer;

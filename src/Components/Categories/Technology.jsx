@@ -51,6 +51,7 @@ const Technology = () => {
               <p>{post.description}</p>
               <img src={post.imageUrl} alt={post.title} className="w-48 h-48 object-cover mb-4" />
               <p>Category: {post.category}</p>
+              <p>posted by : {post.postedby}</p>
               <p>Date: {new Date(post.date).toLocaleString()}</p>
             </li>
           ))}

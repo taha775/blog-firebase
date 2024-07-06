@@ -57,8 +57,8 @@ const Adminpanel = () => {
           <Link to={`allusers/${uid}`} className={getLinkClass('allusers')}>All Users</Link>
 
           {/* Conditionally render All Authors link based on user role */}
-          {userRole !== 'aurthor' && (
-            <Link to={`allauthors/${uid}`} className={getLinkClass('allauthors')}>All Authors</Link>
+          {userRole !== 'moderator' && (
+            <Link to={`allmoderators/${uid}`} className={getLinkClass('allmoderators')}>All Moderators</Link>
           )}
 
           <Link to={`allposts/${uid}`} className={getLinkClass('allposts')}>All Posts</Link>
