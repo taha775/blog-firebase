@@ -20,7 +20,15 @@
   margin-bottom: 15px;
 }
 
+li{
+list-style-type: none;  
+}
 
+
+a{
+  text-decoration: none;
+
+}
 
 
 /* navbar */

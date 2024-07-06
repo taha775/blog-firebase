@@ -1,7 +1,7 @@
 import React from 'react';
 import { FaFacebook, FaInstagram, FaTwitter } from 'react-icons/fa6';
 import { useSelector } from 'react-redux';
-
+import "../App.css"
 const Footer = () => {
   const { theme } = useSelector(state => state.theme);
 
@@ -13,7 +13,7 @@ const Footer = () => {
           <div>
             <p className={`font-myfont text-base tracking-wide ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Category</p>
             <ul className="mt-2 space-y-2">
-              <li><a href="/" className="transition-colors duration-300 hover:text-orange-600">News</a></li>
+              <li><a href="/" className="transition-colors  duration-300 hover:text-orange-600">News</a></li>
               <li><a href="/" className="transition-colors duration-300 hover:text-orange-600">World</a></li>
               <li><a href="/" className="transition-colors duration-300 hover:text-orange-600">Games</a></li>
               <li><a href="/" className="transition-colors duration-300 hover:text-orange-600">References</a></li>

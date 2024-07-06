@@ -46,7 +46,7 @@ const Navbar = ({showNavbar}) => {
             <NavLink
   to="/"
   onClick={() => handleTabClick("Home")}
-  className={`font-myfont py-4 px-2 hover:border-myorange hover:border-t-2 hover:border-b-2  transition-all duration-500 ease-in-out ${
+  className={`font-myfont py-4 px-2 hover:border-myorange hover:border-t-2 hover:border-b-2 no-underline transition-all duration-500 ease-in-out ${
     activeTab === "Home" ? 'bg-myorange text-black border-t-2 border-b-2  border-myorange' : theme === "dark" ? 'text-orange' : 'text-black'
   }`}
 >
@@ -57,7 +57,7 @@ const Navbar = ({showNavbar}) => {
               <NavLink
                 to="/aboutus"
                 onClick={() => handleTabClick("ABOUT US")}
-                className={`font-myfont py-4 px-2 hover:border-myorange hover:border-t-2 hover:border-b-2 transition-all duration-500 ease-in-out ${
+                className={`font-myfont py-4 px-2 hover:border-myorange hover:border-t-2 no-underline hover:border-b-2 transition-all duration-500 ease-in-out ${
                   activeTab === "ABOUT US" ? 'bg-myorange text-black border-t-2 border-b-2  border-myorange' : theme === "dark" ? 'text-orange' : 'text-black'
                 }`}
               >
@@ -68,7 +68,7 @@ const Navbar = ({showNavbar}) => {
               <NavLink
                 to="/disclaimer"
                 onClick={() => handleTabClick("disclaimer")}
-                className={`font-myfont py-4 px-2 hover:border-myorange hover:border-t-2 hover:border-b-2 transition-transform duration-1000 ease-in-out ${
+                className={`font-myfont py-4 px-2 no-underline hover:border-myorange hover:border-t-2 hover:border-b-2 transition-transform duration-1000 ease-in-out ${
                   activeTab === "disclaimer" ? 'bg-myorange text-black border-t-2 border-b-2  border-myorange' : theme === "dark" ? 'text-orange' : 'text-black'
                 }`}
               >
@@ -79,7 +79,7 @@ const Navbar = ({showNavbar}) => {
               <NavLink
                 to="/privacypolicy"
                 onClick={() => handleTabClick("Privacy Policy")}
-                className={`font-myfont py-4 px-2 hover:border-myorange hover:border-t-2 hover:border-b-2 transition-all duration-500 ease-in-out ${
+                className={`font-myfont py-4 px-2 no-underline hover:border-myorange hover:border-t-2 hover:border-b-2 transition-all duration-500 ease-in-out ${
                   activeTab === "Privacy Policy" ? 'bg-myorange text-black border-t-2 border-b-2  border-myorange' : theme === "dark" ? 'text-orange' : 'text-black'
                 }`} >
                 PRIVACY POLICY
@@ -89,7 +89,7 @@ const Navbar = ({showNavbar}) => {
               <NavLink
                 to="/contact"
                 onClick={() => handleTabClick("Contact")}
-                className={`font-myfont py-4 px-2 hover:border-myorange hover:border-t-2 hover:border-b-2 transition-all duration-500 ease-in-out ${
+                className={`font-myfont py-4 px-2 no-underline hover:border-myorange hover:border-t-2 hover:border-b-2 transition-all duration-500 ease-in-out ${
                   activeTab === "Contact" ? 'bg-myorange text-black border-t-2 border-b-2  border-myorange' : theme === "dark" ? 'text-orange' : 'text-black'
                 }`} >
                 CONTACT US 
@@ -162,7 +162,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/buisness"
             onClick={() => handleTabClick("Business")}
-            className={`hover:text-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Business" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:text-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "Business" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             BUSINESS
           </NavLink>
@@ -171,7 +171,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/entertainment"
             onClick={() => handleTabClick("Entertainment")}
-            className={`hover:text-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Entertainment" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:text-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "Entertainment" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             ENTERTAINMENT
           </NavLink>
@@ -180,7 +180,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/health"
             onClick={() => handleTabClick("Health")}
-            className={`hover:text-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Health" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:text-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "Health" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             HEALTH
           </NavLink>
@@ -189,7 +189,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/news"
             onClick={() => handleTabClick("News")}
-            className={`hover:text-myorange hover:border-b-2 hover:border-myorange ${activeTab === "News" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:text-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "News" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             NEWS
           </NavLink>
@@ -198,7 +198,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/sports"
             onClick={() => handleTabClick("Sports")}
-            className={`hover:text-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Sports" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:text-myorange  no-underline hover:border-b-2 hover:border-myorange ${activeTab === "Sports" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             SPORTS
           </NavLink>
@@ -207,7 +207,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/technology"
             onClick={() => handleTabClick("Technology")}
-            className={`hover:text-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Technology" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:text-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "Technology" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             TECHNOLOGY
           </NavLink>
@@ -216,7 +216,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/travel"
             onClick={() => handleTabClick("Travel")}
-            className={`hover:text-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Travel" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:text-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "Travel" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             TRAVEL
           </NavLink>
@@ -225,7 +225,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/lifestyle"
             onClick={() => handleTabClick("Lifestyle")}
-            className={`hover:text-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Lifestyle" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:text-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "Lifestyle" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             LIFESTYLE
           </NavLink>
@@ -234,7 +234,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/education"
             onClick={() => handleTabClick("Education")}
-            className={`hover:text-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Education" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:text-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "Education" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             EDUCATION
           </NavLink>
@@ -243,7 +243,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/history"
             onClick={() => handleTabClick("History")}
-            className={`hover:text-myorange hover:border-b-2 hover:border-myorange ${activeTab === "History" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:text-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "History" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             HISTORY
           </NavLink>
@@ -252,7 +252,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/other"
             onClick={() => handleTabClick("Other")}
-            className={`hover:text-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Other" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:text-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "Other" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             OTHER
           </NavLink>
@@ -266,7 +266,7 @@ const Navbar = ({showNavbar}) => {
               <NavLink
                 to="/"
                 onClick={() => { handleTabClick("HOME"); toggleMenu(); }}
-                className={`font-myfont hover:text-myorange ${activeTab === "Home" ? 'text-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+                className={`font-myfont no-underline hover:text-myorange ${activeTab === "Home" ? 'text-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
               >
                 HOME
               </NavLink>
@@ -276,7 +276,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/business"
             onClick={() => handleTabClick("Business")}
-            className={`hover:bg-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Business" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:bg-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "Business" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             BUSINESS
           </NavLink>
@@ -285,7 +285,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/entertainment"
             onClick={() => handleTabClick("Entertainment")}
-            className={`hover:bg-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Entertainment" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:bg-myorange hover:border-b-2 no-underline hover:border-myorange ${activeTab === "Entertainment" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             ENTERTAINMENT
           </NavLink>
@@ -294,7 +294,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/health"
             onClick={() => handleTabClick("Health")}
-            className={`hover:bg-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Health" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:bg-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "Health" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             HEALTH
           </NavLink>
@@ -303,7 +303,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/news"
             onClick={() => handleTabClick("News")}
-            className={`hover:bg-myorange hover:border-b-2 hover:border-myorange ${activeTab === "News" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:bg-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "News" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             NEWS
           </NavLink>
@@ -312,7 +312,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/sports"
             onClick={() => handleTabClick("Sports")}
-            className={`hover:bg-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Sports" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:bg-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "Sports" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             SPORTS
           </NavLink>
@@ -321,7 +321,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/technology"
             onClick={() => handleTabClick("Technology")}
-            className={`hover:bg-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Technology" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:bg-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "Technology" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             TECHNOLOGY
           </NavLink>
@@ -330,7 +330,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/travel"
             onClick={() => handleTabClick("Travel")}
-            className={`hover:bg-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Travel" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:bg-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "Travel" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             TRAVEL
           </NavLink>
@@ -339,7 +339,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/lifestyle"
             onClick={() => handleTabClick("Lifestyle")}
-            className={`hover:bg-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Lifestyle" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:bg-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "Lifestyle" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             LIFESTYLE
           </NavLink>
@@ -348,7 +348,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/education"
             onClick={() => handleTabClick("Education")}
-            className={`hover:bg-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Education" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:bg-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "Education" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             EDUCATION
           </NavLink>
@@ -357,7 +357,7 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/history"
             onClick={() => handleTabClick("History")}
-            className={`hover:bg-myorange hover:border-b-2 hover:border-myorange ${activeTab === "History" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:bg-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "History" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             HISTORY
           </NavLink>
@@ -366,16 +366,16 @@ const Navbar = ({showNavbar}) => {
           <NavLink
             to="/other"
             onClick={() => handleTabClick("Other")}
-            className={`hover:bg-myorange hover:border-b-2 hover:border-myorange ${activeTab === "Other" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
+            className={`hover:bg-myorange no-underline hover:border-b-2 hover:border-myorange ${activeTab === "Other" ? 'text-myorange border-b-2 border-myorange' : theme === "dark" ? 'text-orange-300' : 'text-black'}`}
           >
             OTHER
           </NavLink>
         </li>
             <li>
-              <Link to="/signup" className={`font-myfont hover:text-myorange ${theme === "dark" ? 'text-white' : 'text-black'}`}>SIGNUP</Link>
+              <Link to="/signup" className={`font-myfont no-underline hover:text-myorange ${theme === "dark" ? 'text-white' : 'text-black'}`}>SIGNUP</Link>
             </li>
             <li>
-              <Link to="/login" className={`font-myfont bg-myorange  text-black rounded-lg px-3 py-2 hover:bg-white hover:text-myorange border border-transparent hover:border-myorange transition duration-220 ease`}>LOGIN</Link>
+              <Link to="/login" className={`font-myfont no-underline bg-myorange  text-black rounded-lg px-3 py-2 hover:bg-white hover:text-myorange border border-transparent hover:border-myorange transition duration-220 ease`}>LOGIN</Link>
             </li>
           </ul>
         </div>
