@@ -41,7 +41,7 @@ const Navbar = ({showNavbar}) => {
       <div className={` pt-0 flex   mx-auto space-x-4 ${theme === 'dark' ? 'dark:bg-gray-800 text-myorange'  : ''} justify-between items-center p-6`}>
         <img style={{}} className=' w-48 h-20 logo'  src={theme === 'dark' ? logoLight : logoLight} alt="Logo" />
         <div style={{height:"120px"}} className="nav-div  hidden md:flex   ">
-          <ul className='nav-items flex justify-evenly  text-1xl gap-3 items-center  text-center '>
+          <ul className='nav-items flex justify-evenly  text-1xl gap-3 items-center no-underline text-center '>
             <li >
             <NavLink
   to="/"
@@ -157,7 +157,7 @@ const Navbar = ({showNavbar}) => {
         
       </div>
 
-      <div className={`categories  ${theme ==="dark"? "text-myorange bg-gray-800" : "bg-white text-black" } flex-wrap justify-center list-none items-center gap-x-10 gap-y-2 font-myfont hidden lg:flex  w-full h-[3.8rem]  item-left `}>
+      <div className={`categories  ${theme ==="dark"? "text-myorange bg-gray-800" : "bg-white text-black" } flex-wrap justify-center list-none items-center gap-x-10 gap-y-2 font-myfont hidden lg:flex no-underline  w-full h-[3.8rem]  item-left `}>
         <li >
           <NavLink
             to="/buisness"
