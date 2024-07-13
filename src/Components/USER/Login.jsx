@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button, Heading } from '@radix-ui/themes';
@@ -9,11 +9,12 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../../Config/Firebase";
 import { toast } from 'react-toastify';
-// Importing the constants
+import "../../App.css"
 
 const Login = () => {
   const { theme } = useSelector(state => state.theme); 
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false); // Initialize loading state
 
   const formik = useFormik({  
     initialValues: {
@@ -22,6 +23,7 @@ const Login = () => {
     },
     onSubmit: async (values, { setSubmitting }) => {
       try {
+        setLoading(true); // Set loading to true on form submission
         const userCredential = await signInWithEmailAndPassword(auth, values.email, values.password);
         const user = userCredential.user;
 
@@ -60,22 +62,17 @@ const Login = () => {
 
           // Check the role and navigate accordingly
           if (userData.role === 'user') {
+            toast.success("user login successful")
             navigate(`/user-panel/${userData.uid}`); // Navigate to user panel with user UID
-          } else if (userData.role === 'moderator' && userData.status ==='pending') {
-            toast.info("please wait for the admin to approved your profile")
-              
+          } else if (userData.role === 'moderator' && userData.status === 'pending') {
+            toast.info("please wait for the admin to approved your profile");
             // navigate(`/writer-panel/${userData.uid}`); // Navigate to writer panel with user UID
-          }
-          else if(userData.role === 'moderator' && userData.status ==='approved'){
-            toast.success("login successful")
-            navigate(`/admin-panel/${userData.uid}`); // Naviga
-          }
-          
-          else {
+          } else if (userData.role === 'moderator' && userData.status === 'approved') {
+            toast.success("login successful");
+            navigate(`/admin-panel/${userData.uid}`); // Navigate to admin panel with user UID
+          } else {
             toast.error('Unknown user role');
           }
-
-         
         } else {
           toast.error('User data not found');
         }
@@ -89,6 +86,7 @@ const Login = () => {
         }
         console.error('Error logging in:', error);
       } finally {
+        setLoading(false); // Set loading to false after submission completes
         setSubmitting(false);
       }
     },
@@ -101,7 +99,7 @@ const Login = () => {
         borderRadius: '8px'
       }}>
         <div className='text-center mb-4'>
-          <Heading as='h2' className='text-4xl'>Log In</Heading>
+          <Heading as='h2' className='text-4xl bg-my'>Log In</Heading>
         </div>
 
         <div className='text-center'>
@@ -117,41 +115,48 @@ const Login = () => {
           <div className={`border-t ${theme === 'dark' ? 'border-gray-500' : 'border-gray-300'} flex-grow`}></div>
         </div>
 
-        <form onSubmit={formik.handleSubmit}>
-          <div className="mt-4">
-            <label htmlFor="email" className={`block text-sm font-medium ${theme === 'dark' ? 'text-blue-700' : 'text-black'}`}>Email Address</label>
-            <input
-              id="email"
-              type="email"
-              name="email"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.email}
-              className={`mt-1 w-full px-3 py-2 rounded-lg border focus:outline-none focus:border-blue-500 ${theme === 'dark' ? 'bg-gray-800 text-white border-black' : 'bg-white text-black border-gray-300'}`}
-              placeholder="Enter your email"
-              autoComplete="email"
-            />
-          </div>
-          <div className="mt-4">
-            <label htmlFor="password" className={`block text-sm font-medium ${theme === 'dark' ? 'text-blue-700' : 'text-black'}`}>Password</label>
-            <input
-              id="password"
-              type="password"
-              name="password"
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.password}
-              className={`mt-1 w-full px-3 py-2 rounded-lg border focus:outline-none focus:border-blue-500 ${theme === 'dark' ? 'bg-gray-800 text-white border-black' : 'bg-white text-black border-gray-300'}`}
-              placeholder="Enter your password"
-              autoComplete="current-password"
-            />
-          </div>
-          <div className="mt-9">
-            <Button color="indigo" variant="outline" className="w-full cursor-pointer p-3" type="submit" disabled={formik.isSubmitting}>
-              Log In
-            </Button>
-          </div>
-        </form>
+        {loading ? (
+        <div className='flex items-center justify-center h-full'>
+        <div className='dots'></div>
+      </div>
+        ) : (
+          <form onSubmit={formik.handleSubmit}>
+            <div className="mt-4">
+              <label htmlFor="email" className={`block text-sm font-medium ${theme === 'dark' ? 'text-blue-700' : 'text-black'}`}>Email Address</label>
+              <input
+                id="email"
+                type="email"
+                name="email"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.email}
+                className={`mt-1 w-full px-3 py-2 rounded-lg border focus:outline-none focus:border-blue-500 ${theme === 'dark' ? 'bg-gray-800 text-white border-black' : 'bg-white text-black border-gray-300'}`}
+                placeholder="Enter your email"
+                autoComplete="email"
+              />
+            </div>
+            <div className="mt-4">
+              <label htmlFor="password" className={`block text-sm font-medium ${theme === 'dark' ? 'text-blue-700' : 'text-black'}`}>Password</label>
+              <input
+                id="password"
+                type="password"
+                name="password"
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+                value={formik.values.password}
+                className={`mt-1 w-full px-3 py-2 rounded-lg border focus:outline-none focus:border-blue-500 ${theme === 'dark' ? 'bg-gray-800 text-white border-black' : 'bg-white text-black border-gray-300'}`}
+                placeholder="Enter your password"
+                autoComplete="current-password"
+              />
+            </div>
+            <div className="mt-9">
+              <Button color="indigo" variant="outline" className="w-full cursor-pointer p-3" type="submit" disabled={formik.isSubmitting}>
+                Log In
+              </Button>
+            </div>
+          </form>
+        )}
+
         <p className="mt-4 text-sm font-sans text-center">
           Don't have an account? <Link to="/signup" className="font-medium text-blue-500 hover:underline">Sign Up</Link>
         </p>

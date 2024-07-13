@@ -62,5 +62,60 @@ input[type="text"] {
 
 
 
+.dots {
+   width: 13.4px;
+   height: 13.4px;
+   border-radius: 50%;
+   background: #ff9900;
+   color: #ff9900;
+   clip-path: inset(-29.1px);
+   animation: dots-izls0vmd 2s infinite linear;
+}
+
+@keyframes dots-izls0vmd {
+   0% {
+      box-shadow: 0 0 0 0, 44.8px 0,-44.8px 0,0 44.8px,0 -44.8px;
+   }
+
+   10% {
+      box-shadow: 0 0 0 0, 13.4px 0,-44.8px 0,0 44.8px,0 -44.8px;
+   }
+
+   20% {
+      box-shadow: 0 0 0 4.5px, 0 0,-44.8px 0,0 44.8px,0 -44.8px;
+   }
+
+   30% {
+      box-shadow: 0 0 0 4.5px, 0 0,-13.4px 0,0 44.8px,0 -44.8px;
+   }
+
+   40% {
+      box-shadow: 0 0 0 9px, 0 0, 0 0,0 44.8px,0 -44.8px;
+   }
+
+   50% {
+      box-shadow: 0 0 0 9px, 0 0, 0 0,0 13.4px,0 -44.8px;
+   }
+
+   60% {
+      box-shadow: 0 0 0 13.4px, 0 0, 0 0,0 0,0 -44.8px;
+   }
+
+   70% {
+      box-shadow: 0 0 0 13.4px, 0 0, 0 0,0 0,0 -13.4px;
+   }
+
+   80% {
+      box-shadow: 0 0 0 17.9px, 0 0, 0 0,0 0,0 0;
+   }
+
+   90%, 100% {
+      box-shadow: 0 0 0 0, 44.8px 0,-44.8px 0,0 44.8px,0 -44.8px;
+   }
+}
+
+
+
+
 /* swiper slider css */
 /* index.css */

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { db } from '../../Config/Firebase'; // Ensure your Firebase configuration is correctly imported
 import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
-
+import "../../App.css"
 const Allposts = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -46,7 +46,11 @@ const Allposts = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="dots mt-4"></div>
+      </div>
+    );
   }
 
   if (error) {

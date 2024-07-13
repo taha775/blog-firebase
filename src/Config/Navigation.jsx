@@ -30,9 +30,11 @@ import Allposts from "../Panels/UserPanel/Allposts";
 import AddPost from "../Panels/AdminPanel/AddPost";
 import Adminprofile from "../Panels/AdminPanel/Adminprofile";
 import MyAdminPost from "../Panels/AdminPanel/MyAdminPost";
-import EditPost from "../Panels/AdminPanel/EditPost";
+import AdminEditPost from "../Panels/AdminPanel/AdminEditPost";
+import UserEditPost from "../Panels/UserPanel/UserEditPost";
 
 import AllModerators from "../Panels/AdminPanel/AllModerators";
+import Editprofile from "../Panels/UserPanel/Editprofile";
 
 
 
@@ -68,7 +70,9 @@ const Navigation = () => {
           <Route path="/user-panel/:uid" element={<Allposts />} />
           <Route path="new-post/:uid" element={<Post />} />
           <Route path="my-posts/:uid" element={<Mypost />} />
-          <Route path="editpost/:postId" element={<EditPost />} />
+          <Route path="edit-profile/:uid" element={<Editprofile />} />
+          
+          <Route path="edit-post/:postId" element={<UserEditPost />} />
         
         </Route>
       
@@ -82,7 +86,7 @@ const Navigation = () => {
           <Route path="allposts/:uid" element={<Allpost />} />
           <Route path="addpost/:uid" element={<AddPost />} />
           <Route path="myposts/:uid" element={<MyAdminPost />} />
-          <Route path="editpost/:postId" element={<EditPost />} />
+          <Route path="editpost/:postId" element={<AdminEditPost />} />
 
         </Route>
         

@@ -1,61 +1,83 @@
 import React, { useEffect, useState } from 'react';
-import EDUCATION from "../../temporardata/education"
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import { db } from '../../Config/Firebase';
+import { collection, query, where, getDocs } from 'firebase/firestore';
+import { motion } from 'framer-motion'; // Import motion from Framer Motion
+import "../../App.css";
 
 const Education = () => {
-
-  const [flipped, setFlipped] = useState(Array(EDUCATION.length).fill(false));
+  const [educationPosts, setEducationPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    AOS.init({
-      duration: 1000, // Duration of the animation in milliseconds
-      once: true, // Whether animation should happen only once
-    });
+    const fetchEducationPosts = async () => {
+      try {
+        const postsCollection = collection(db, 'posts');
+        const educationPostsQuery = query(postsCollection, where('category', '==', 'Education'));
+
+        const querySnapshot = await getDocs(educationPostsQuery);
+        const posts = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+
+        setEducationPosts(posts);
+        setLoading(false);
+      } catch (err) {
+        console.error('Error fetching education posts:', err);
+        setError('Error fetching education posts');
+        setLoading(false);
+      }
+    };
+
+    fetchEducationPosts();
   }, []);
 
-  const handleFlip = (index) => {
-    setFlipped(prev => {
-      const newFlipped = [...prev];
-      newFlipped[index] = !newFlipped[index];
-      return newFlipped;
-    });
-  };
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="dots mt-4"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div className="text-center mt-4">{error}</div>;
+  }
+
+  const duplicatedPosts = [...educationPosts, ...educationPosts]; // Duplicate the posts array
 
   return (
-    <div className="grid md:grid-cols-3 sm:grid-cols-2 grid-cols-1 mt-10 gap-y-24  gap-x-9">
-      {EDUCATION.map((item, index) => (
-        <div
-          key={index}
-          className="relative w-full h-72"
-          onClick={() => handleFlip(index)}
-          data-aos="fade-up" // AOS animation type
-        >
-          <div className={`absolute w-full h-full   transition-transform duration-500 transform ${flipped[index] ? 'rotate-y-180' : ''} hover:scale-105`}>
-            <div className="bg-white shadow-lg   rounded-lg overflow-hidden">
-              <img className="w-full h-56 object-cover object-center" src={item.image} alt={item.title} />
-              <div className="p-4 h-auto hover:text-blue-600">
-              <h2 className="text-lg font-sans text-black-600 cursor-pointer overflow-hidden h-16">{item.title}</h2>
-
-                <div className="flex items-center   mt-2">
-                  <img className="w-8  h-8 rounded-full mr-2" src={item.profile_icon} alt={item.person_name} />
-                  <p className="text-sm flex text-gray-700">{item.person_name}</p>
+    <div className="education-posts p-4">
+      <h2 className="text-2xl font-bold mb-4">Education Posts</h2>
+      <div className="scroll-container flex overflow-hidden whitespace-nowrap">
+        <div className="scroll-content flex animate-scroll">
+          {duplicatedPosts.length > 0 ? (
+            duplicatedPosts.map((post, index) => (
+              <motion.div
+                key={index} // Use index as key for duplicated array
+                className="post-item border p-4 max-w-xs relative mr-4"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <img
+                  src={post.imageUrl}
+                  alt={post.title}
+                  className="w-full h-48 object-cover mb-4"
+                />
+                <div className="post-info absolute bottom-0 left-0 w-full p-2 bg-black bg-opacity-50 text-white">
+                  <h3 className="text-lg font-semibold">{post.title}</h3>
+                  <p className="text-sm">{new Date(post.date).toLocaleString()}</p>
                 </div>
-                <p className="text-sm text-gray-600 mt-2">Published Date: {item.published_date}</p>
-              </div>
-            </div>
-          </div>
-          <div className={`absolute w-full h-full transition-transform duration-500 transform ${flipped[index] ? 'rotate-y-0' : 'rotate-y-180'}`}>
-        
-
-              <p className="text-lg text-fuchsia-200 mt-2">{item.description}</p>
-            
-            </div>
-          </div>
-        
-      ))}
+              </motion.div>
+            ))
+          ) : (
+            <p>No education posts available</p>
+          )}
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default Education;

@@ -8,19 +8,18 @@ import { Dropdown } from 'react-bootstrap';
 import { toggleTheme } from '../../store/slices/themeslice';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db, auth } from '../../Config/Firebase';
-import FileUploadDialog from '../../Components/DialogOpen/Dialogbox';
-import logoLight from "../../assets/logo.png"; // Light mode logo
-import logoDark from "../../assets/light.png";
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
-import { FaBell } from 'react-icons/fa6';
+
+import logoLight from "../../assets/logo.png";
+
+import 'bootstrap/dist/css/bootstrap.min.css'; 
+import { FaBell, FaPerson } from 'react-icons/fa6';
 
 const ProfileHeader = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { uid } = useParams();
   const [user, setUser] = useState(null);
-  const [profileImg, setProfileImg] = useState(null);
-  const [dialogOpen, setDialogOpen] = useState(false);
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -28,7 +27,8 @@ const ProfileHeader = () => {
         const userdata = query(collection(db, 'users'), where('uid', '==', uid)); // Query to fetch user document by uid
         const querySnapshot = await getDocs(userdata);
         querySnapshot.forEach((doc) => {
-          setUser(doc.data()); // Set user state with document data
+          setUser(doc.data());
+          console.log(doc.data()) // Set user state with document data
         });
       } catch (error) {
         console.error('Error fetching user:', error);
@@ -54,17 +54,12 @@ const ProfileHeader = () => {
     navigate(`/user-panel/${uid}/my-posts/${uid}`);
   };
 
-  const handleFileSelect = (file) => {
-    // Assuming you want to set the profileImg state to the URL of the selected file
-    const imageUrl = URL.createObjectURL(file);
-    setProfileImg(imageUrl);
-    // You may want to upload the file to Firebase storage or elsewhere at this point
-  };
+
 
   const handleEditProfile = () => {
     // Navigate to edit profile page or handle edit profile logic
     // Example:
-    navigate(`/user-panel/${uid}/edit-profile`);
+    navigate(`/user-panel/${uid}/edit-profile/${uid}`);
   };
 
   const handleSettings = () => {
@@ -107,8 +102,13 @@ const ProfileHeader = () => {
         <button onClick={handlePost} className="px-4 py-2 rounded-md bg-myorange text-white hover:bg-myorange-dark">ADD NEW POST</button>
         <FaBell className='text-blue-600' size={25} />
         <div className='items-center flex-col'>
-          <Stack direction="row" spacing={2}>
-            <Avatar alt={user?.name} src={profileImg || "/static/images/avatar/placeholder.jpg"} onClick={() => setDialogOpen(true)} />
+          <Stack direction="row">
+            
+          <Avatar
+      alt={user?.name}
+      src={user?.profileImage}
+    />
+            
             <Dropdown>
               <Dropdown.Toggle variant="link" id="dropdown-profile" className="text-decoration-none text-reset">
                 {user?.name}
@@ -126,7 +126,7 @@ const ProfileHeader = () => {
           <SiDarkreader size={35} color={theme === "dark" ? "white" : "black"} />
         </button>
       </div>
-      <FileUploadDialog open={dialogOpen} onClose={() => setDialogOpen(false)} onFileSelect={handleFileSelect} />
+     
     </div>
   );
 };

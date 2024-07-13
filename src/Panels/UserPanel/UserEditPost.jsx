@@ -4,7 +4,7 @@ import JoditEditor from 'jodit-react';
 import { db } from '../../Config/Firebase'; // Ensure your Firebase configuration is correctly imported
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 
-const EditPost = () => {
+const UserEditPost = () => {
   const { uid, postId } = useParams();
   const navigate = useNavigate();
   const [title, setTitle] = useState('');
@@ -92,4 +92,4 @@ const EditPost = () => {
   );
 };
 
-export default EditPost;
+export default UserEditPost;

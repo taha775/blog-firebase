@@ -2,13 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom'; // Assuming you are using React Router for routing
 import { db } from '../../Config/Firebase'; // Ensure your Firebase configuration is correctly imported
 import { collection, query, where, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import { useSelector } from 'react-redux';
+import "../../App.css"
+import { FaArrowAltCircleLeft } from 'react-icons/fa';
 
 const Mypost = () => {
+  const navigate =  useNavigate()
   const { uid } = useParams(); // Access the uid from URL params
   const [userPosts, setUserPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
+
+  const { theme } = useSelector(state => state.theme);
+
+
+  const gotoAllpost =()=>{
+    navigate(`/user-panel/${uid}`); 
+  }
 
   useEffect(() => {
     const fetchUserPosts = async () => {
@@ -47,42 +57,46 @@ const Mypost = () => {
     }
   };
 
-
-
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="dots mt-4"></div>
+      </div>
+    );
   }
-
   if (error) {
     return <div>{error}</div>;
   }
 
   return (
-    <div className="my-posts">
-      <h2 className="text-2xl font-bold mb-4">My Posts</h2>
+    <div className={`container mx-auto mt-28 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>
+
+     <FaArrowAltCircleLeft color='' className='text-myorange size-8 mx-2 ' onClick={()=>gotoAllpost()}/>
+  
+      <h2 className="text-4xl font-sans text-center underline underline-offset-8 mb-10">My Posts</h2>
       
       {userPosts.length > 0 ? (
-        <ul>
+        <div className="flex flex-wrap">
           {userPosts.map((post) => (
-            <li key={post.id} className="post-item border-b p-4">
-              <h3 className="text-lg font-semibold">{post.title}</h3>
-              <p>{post.description}</p>
-              <img src={post.imageUrl} alt={post.title} className="w-48 h-48 object-cover mb-4" />
-              <p>Category: {post.category}</p>
-              <p>description: {post.content}</p>
-              <p>Date: {new Date(post.date).toLocaleString()}</p>
-              <div className="flex space-x-4 mt-2">
-              <Link to={`/user-panel/${uid}/usereditpost/${post.id}`} className="bg-blue-500 text-black px-3  rounded-lg  hover:underline">Edit</Link>
+            <div key={post.id} className="postdata p-6 border-2 rounded-xl mb-8 w-full lg:w-7/12 mx-auto">
+              <img src={post.imageUrl} alt={post.title} className="w-full rounded-lg mb-6" />
+              <h3 className="text-3xl lg:text-5xl font-sans text-center mt-6">{post.title}</h3>
+              <p className="text-lg lg:text-2xl mt-6">{post.description}</p>
+              <div className="text-center mt-8">
+                <Link to={`/user-panel/${uid}/edit-post/${post.id}`} className="bg-blue-500 text-white px-4 py-2 rounded-lg mr-4 hover:bg-blue-700">Edit</Link>
                 <button
                   onClick={() => handleDelete(post.id)}
-                  className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700"
+                  className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-700"
                 >
                   Delete
                 </button>
               </div>
-            </li>
+              <p className="text-sm mt-4">Category: {post.category}</p>
+              <p className="text-sm mt-2">Content: {post.content}</p>
+              <p className="text-sm mt-2">Published Date: {new Date(post.date).toLocaleString()}</p>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <p>No posts available</p>
       )}
